@@ -2,8 +2,12 @@
 This Repository is for configuration files
 
 <!-- Set The Powershell profile
-        - Delete the Current Profile
-        - New-Item -Path C:\Users\kusha\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 -ItemType SymbolicLink -Value .\Microsoft.PowerShell_profile.ps1
+        - If Current Profile is present:
+                - Delete the Current Profile
+        -Else:
+                - cd C:\Users\<user>\Documents\
+                - mkdir WindowsPowerShell
+        - New-Item -Path C:\Users\<user>\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 -ItemType SymbolicLink -Value .\Microsoft.PowerShell_profile.ps1
          -->
 <!-- Change Execution Policy
         - Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
