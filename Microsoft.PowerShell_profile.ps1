@@ -308,6 +308,11 @@ function GetFormattedSize ($size) {
   }
   return $unit, $formattedSize
 }
+
+function ListAllFilesAndFoders ($path) {
+  tree /f /a $path
+}
+
 # List all disks in the system
 function ListAllDisks () {
   Get-Disk | Select-Object Number, @{Name = "Size (GB)"; Expression = { $_.Size / 1GB } }, @{Name = "Free Space (GB)"; Expression = { $_.FreeSpace / 1GB } }, Status, MediaType
