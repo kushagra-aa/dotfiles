@@ -2,6 +2,8 @@
 Set-Alias vim nvim
 Set-Alias ll ls
 Set-Alias g git
+Set-Alias touch New-Item
+Set-Alias treeEx Get-ChildItemsWithoutExcludedFolders
 
 # for Starship Promt
 Invoke-Expression (&starship init powershell)
@@ -320,4 +322,23 @@ function ListAllDisks () {
 # List all Local Disks
 function ListAllLocalDisks () {
   Get-PSDrive
+}
+
+function Get-ChildItemsWithoutExcludedFolders {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Path,
+        [string[]]$ExcludeFolders = ("node_modules", ".next", ".pnpm-store")
+    )
+
+    Get-ChildItem -Path $Path -Force | ForEach-Object {
+        if ($_.PSIsContainer -and ($ExcludeFolders -contains $_.Name)) {
+            # Do nothing, effectively skipping these directories
+        } else {
+            $_ | Select-Object FullName, PSIsContainer
+            if ($_.PSIsContainer) {
+                Get-ChildItemsWithoutExcludedFolders -Path $_.FullName -ExcludeFolders $ExcludeFolders
+            }
+        }
+    }
 }
