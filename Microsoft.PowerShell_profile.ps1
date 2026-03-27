@@ -342,3 +342,13 @@ function Get-ChildItemsWithoutExcludedFolders {
         }
     }
 }
+
+function startDocker (){
+  D:\dotfiles\start-docker.ps1
+}
+
+function startWSL () {
+  D:\dotfiles\wait-and-start-wsl.ps1
+}
+
+if ($env:TERM_PROGRAM -eq "kiro") { . "$(kiro --locate-shell-integration-path pwsh)" }
